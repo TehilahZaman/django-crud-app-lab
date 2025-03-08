@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/postits/postit-index.css' %}">
+{% endblock head %}
+    
+
+{% block content %}
+<section class="postits-container">
+    {% for postit in postits %}
+    <div class="postit">
+        <a href="{% url 'postit-detail' postit.id%}">
+            <div class="postit-content">
+                <h3>{{postit.title}}</h3>
+                <p>{{postit.importance}}</p>
+                <p>{{postit.color}}</p>
+                <p>{{postit.text}}</p>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</section>
+{% endblock %}
+    

@@ -1,0 +1,45 @@
+<!--  by convention CBVs look or HTML in templates folder > 
+  in folders named afer the app -->
+
+
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}" />
+{% endblock %} 
+
+
+{% block content %}
+
+<div class="page-header">
+<!--  for editing model instances, context variables are passed to help 
+  Django passes the model instance as an object by the lowercase name of the model 
+  postit-->
+  <!--  use this variable to check if the postit object exists 
+    to determine if the form is editing or creating   -->
+    <!--  we could also write it as 'onject' instead of postit -->
+
+    
+    {% if postit %}
+    <h1>Edit {{postit.name}}</h1>
+      
+    {% else %}
+    <h1>Add a Postit</h1>
+      
+    {% endif %}
+</div>
+
+<!--  empty action means the form is submited to the same url that served it -->
+<form action="" method="post" class="form-container">
+    <!-- security token  -->
+  {% csrf_token %}
+  <table>
+<!--  this render the form as a table 
+  this is optional and can be changed -->
+    {{ form.as_table }}
+  </table>
+  <button type="submit" class="btn submit">Submit!</button>
+</form>
+
+{% endblock %}

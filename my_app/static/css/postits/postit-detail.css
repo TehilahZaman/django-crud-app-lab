@@ -1,0 +1,13 @@
+.postit {
+  position: absolute;
+  top: 32%;
+  left: 41%;
+  border: solid black;
+  background-color: #fff0c8;
+  padding: 0 20px;
+  width: 350px;
+  height: 350px;
+  margin: 5px;
+  border: solid black;
+  box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.2);
+}

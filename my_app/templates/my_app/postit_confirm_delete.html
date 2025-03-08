@@ -1,0 +1,19 @@
+{% extends 'base.html' %}  
+{% load static %} 
+
+
+{% block content %}
+
+<div class="page-header">
+  <h1>Delete Post it?</h1>
+</div>
+
+<h2>Are you sure you want to delete {{ postit.name }}?</h2>
+
+<form action="" method="post" class="form">
+  {% csrf_token %}
+  <a href="{% url 'postit-detail' postit.id %}" class="btn secondary">Cancel</a>
+  <button type="submit" class="btn danger">Yes - Delete!</button>
+</form>
+
+{% endblock %}

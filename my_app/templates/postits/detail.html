@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/postits/postit-detail.css' %}">
+{% endblock head %}
+
+
+{% block content %}
+    <section class="postit">
+        <div>
+            <h1>{{postit.title}}</h1>
+            <h3>{{posit.imporance}}</h3>
+            <p>{{postit.text}}</p>
+
+<div class="postit-actions">
+    <a href="{% url 'postit-update' postit.id %}">Edit</a>
+    <a href="{% url 'postit-delete' postit.id %}">Delete</a>
+</div>
+
+        </div>
+    </section>
+
+
+<!-- display for creating a reminder  -->
+ <h3>Add a Reminder</h3>
+<form method="post" class="subsection-content" autocomplete="off">
+    <!--  token for security 
+       form will be wrapped in a p tag-->
+  {% csrf_token %} 
+  {{ reminder_form.as_p }}
+  <button type="submit" class="btn submit">Add Reminder</button>
+</form>
+
+
+<!-- added display for reminders -->
+<div class="remindercontainer">
+  <section class="reminders">
+    <div class="subsection-title">
+      <h2>Reminders</h2>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Time of Day</th>
+          <th>To Do</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for reminder in postit.reminder_set.all %}
+          <tr>
+            <td>{{reminder.date}}</td>
+            <td>{{reminer.get_time_of_day_display}}</td>
+            <td>{{reminder.todo}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+</div>
+
+
+{% endblock  %}
+
+    
+    
+ 

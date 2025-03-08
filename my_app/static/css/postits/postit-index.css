@@ -1,0 +1,20 @@
+.postits-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.postit {
+  background-color: #fff0c8; 
+  padding: 0 20px;
+  width: 200px;
+  height: 200px;
+  margin: 5px;
+  border: solid black;
+  box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.2);
+}
+
+a {
+  text-decoration: none;
+}
+
