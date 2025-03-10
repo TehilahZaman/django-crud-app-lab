@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 #  for CBV import --Views
@@ -9,6 +9,16 @@ from .forms import ReminderForm
 
 
 # Create your views here.
+
+def add_reminder(request, postit_id):
+    form = ReminderForm(request.POST)
+    if form.is_valid():
+        new_reminder = form.save(commit=False)
+        new_reminder.postit_id = postit_id
+        new_reminder.save()
+    return redirect('postit-detail', postit_id=postit_id)
+
+
 
 # CBV
 
