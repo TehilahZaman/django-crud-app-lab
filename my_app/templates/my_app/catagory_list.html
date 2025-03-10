@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link rel="stylesheet" href="{% static 'css/toys/toy-index.css' %}" />
+{% endblock %} {% block content %}
+
+<section class="card-container">
+  {% for catagory in catagory_list %}
+  <div class="card">
+    <!-- <div class="card-bg" style="background-color: {{ toy.color }}"></div> -->
+    <a href="{% url 'catagory-detail' catagory.id %}">
+      <div class="card-content">
+        <h2>{{ catagory.tag }}</h2>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+</section>
+
+{% endblock %}

@@ -3,11 +3,22 @@ from django.urls import reverse
 
 # Create your models here.
 
+class Catagory(models.Model):
+    tag = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.tag
+
+    def get_absolute_url (self):
+        return reverse('catagory-detail', kwargs={'pk': self.id})
+    
+
 class Postit(models.Model):
     title = models.CharField(max_length=100)
     text = models.TextField(max_length=250)
     color = models.CharField(max_length=100)
     importance = models.IntegerField()
+    catagories = models.ManyToManyField(Catagory)
 
     def __str__(self):
         return self.title
@@ -39,3 +50,6 @@ class Reminder(models.Model):
     
     class Meta:
         ordering = ['-date']
+
+
+

@@ -46,14 +46,80 @@
         {% for reminder in postit.reminder_set.all %}
         <tr>
           <td>{{reminder.date}}</td>
-          <td>{{reminer.get_time_of_day_display}}</td>
+          <td>{{reminder.get_time_of_day_display}}</td>
           <td>{{reminder.todo}}</td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
-    {% else %}
   </section>
 </div>
+
+</section>
+
+<!-- <section class="catagories">
+  <h3>Available Catagories</h3>
+  <div class="subsection-content">
+    {% for catagory in catagories %}
+      <div class="catagory-container">
+        <div class="color-block" style="background-color: {{ postit.color }}"></div>
+        <p> {{ catagory.tag }}</p>
+        <form action="{% url 'associate-catagory' postit.id catagory.id %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn submit">Give Catagory</button>
+        </form>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="catagories">
+  <div class="subsection-title">
+    <h2>Catagories</h2>
+  </div> -->
+
+  <h3>{{ postit.title }}'s Catagories</h3>
+  <div class="subsection-content">
+    {% if postit.catagories.count %} 
+      {% for catagory in postit.catagories.all %}
+        <div class="catagory-container">
+          <div class="color-block" style="background-color: {{ postit.color }}"></div>
+          <a href="{% url 'catagory-detail' catagory.id %}">
+            <p>A {{ catagory.tag }} tag</p>
+          </a>
+          <form action="{% url 'remove-catagory' postit.id catagory.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Remove Catagory</button>
+          </form>
+
+        </div>
+      {% endfor %} 
+    {% else %}
+      <p class="no-catagories">{{postit.title}} doesn't have any catagories!</p>
+    {% endif %}
+  </div>
+
+  <h3>Available Catagories</h3>
+<div class="subsection-content">
+  {% if catagories.count %} 
+    {% for catagory in catagories.all %}
+      <div class="catagory-container">
+        <div class="color-block" style="background-color: {{ postit.color }}"></div>
+        <a href="{% url 'catagory-detail' catagory.id %}">
+          <p>{{ catagory.tag }} tag</p>
+        </a>
+        <form action="{% url 'associate-catagory' postit.id catagory.id %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn submit">Give Catagory</button>
+        </form>
+      </div>
+    {% endfor %} 
+  {% else %}
+    <p class="all-catagories">{{postit.title}} already has all the available catagories 🥳</p>
+  {% endif %}
+</div>
+
+</section>
+
 
 {% endblock %}

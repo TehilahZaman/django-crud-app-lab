@@ -2,30 +2,27 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{%static 'css/base.css' %}" >
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{%static 'css/base.css' %}" />
     <title>Post Its</title>
-    
-    {% block head %} 
-    {% endblock head %}
-</head>
 
-<body>
+    {% block head %} {% endblock head %}
+  </head>
+
+  <body>
     <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="{% url 'postit-create' %}">Make a post it</a></li>
-            <li><a href="/postits">Post its</a></li>
-        </ul>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/postits">Post its</a></li>
+        <li><a href="{% url 'postit-create' %}">Make a post it</a></li>
+        <!-- <li><a href="{% url 'postit-index' %}">All Post its</a></li> -->
+        <li><a href="{% url 'catagory-index' %}">All Catagories</a></li>
+        <li><a href="{% url 'catagory-create' %}">Add a Catagory</a></li>
+        <ul></ul>
+      </ul>
     </nav>
-    <main>
-        
-        {% block content %}
-            
-        {% endblock %}
-            
-    </main>
-</body>
+    <main>{% block content %} {% endblock %}</main>
+  </body>
 </html>
