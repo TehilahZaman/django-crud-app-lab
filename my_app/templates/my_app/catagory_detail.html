@@ -1,19 +1,18 @@
-{% extends 'base.html' %} 
-{% load static %} 
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/catagories/catagory-detail.css' %}"
+/>
+{% endblock %} {% block content %}
 
-{% block head %}
-<link rel="stylesheet" href="{% static 'css/toys/catagory-detail.css' %}" />
-{% endblock %} 
-
-{% block content %}
+<h1>Catagory:</h1>
 
 <div class="card">
-    <!-- style="border-color: {{ toy.color }}" -->
   <div class="card-content">
-    <h2>{{ catagory.tag }}</h2>
+    <h2>#{{ catagory.tag }}</h2>
+    <a href="{% url 'catagory-update' catagory.id %}" class="btn warn">Edit</a>
+    <a href="{% url 'catagory-delete' catagory.id %}" class="btn danger">Delete</a>
   </div>
 </div>
-<a href="{% url 'catagory-update' catagory.id %}" class="btn warn">Edit</a>
-<a href="{% url 'catagory-delete' catagory.id %}" class="btn danger">Delete</a>
 
 {% endblock %}

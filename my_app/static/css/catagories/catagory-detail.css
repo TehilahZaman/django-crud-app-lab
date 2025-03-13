@@ -1,15 +1,15 @@
 main {
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  min-height: auto;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .card {
   width: 224px;
   height: 224px;
   margin: 25px 25px 15px 40px;
-  border: solid 2px;
+  border: solid black;
   box-shadow: var(--card-box-shadow);
   position: relative;
 }

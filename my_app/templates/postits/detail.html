@@ -12,23 +12,54 @@
       <a href="{% url 'postit-delete' postit.id %}">Delete</a>
     </div>
   </div>
+  </section>
+
+<section class="catagories"> 
+  <div class="subsection-content">
+    <h3>{{ postit.title }}'s Catagories</h3>
+    {% if postit.catagories.count %} 
+      {% for catagory in postit.catagories.all %}
+        <div class="catagory-container">
+          <div class="color-block" style="background-color: {{ postit.color }}"></div>
+          <a href="{% url 'catagory-detail' catagory.id %}">
+            <p>A {{ catagory.tag }} tag</p>
+          </a>
+          <form action="{% url 'remove-catagory' postit.id catagory.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Remove Catagory</button>
+          </form>
+
+        </div>
+      {% endfor %} 
+    {% else %}
+      <p class="no-catagories">{{postit.title}} doesn't have any catagories!</p>
+    {% endif %}
+  </div>
+
+
+  <div class="subsection-content">
+    <h3>Available Catagories</h3>
+  {% if catagories.count %} 
+    {% for catagory in catagories.all %}
+      <div class="catagory-container">
+        <div class="color-block" style="background-color: {{ postit.color }}"></div>
+        <a href="{% url 'catagory-detail' catagory.id %}">
+          <p>{{ catagory.tag }} tag</p>
+        </a>
+        <form action="{% url 'associate-catagory' postit.id catagory.id %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn submit">Give Catagory</button>
+        </form>
+      </div>
+    {% endfor %} 
+  {% else %}
+    <p class="all-catagories">{{postit.title}} already has all the available catagories 🥳</p>
+  {% endif %}
+</div>
 </section>
 
-<!-- display for creating a reminder  -->
-<h3>Add a Reminder</h3>
-<form
-  action="{% url 'add-reminder' postit.id %}"
-  method="post"
-  class="subsection-content"
-  autocomplete="off"
->
-  <!--  token for security 
-       form will be wrapped in a p tag-->
-  {% csrf_token %} {{ reminder_form.as_p }}
-  <button type="submit" class="btn submit">Add Reminder</button>
-</form>
 
-<!-- added display for reminders -->
+
 <div class="reminder-container">
   <section class="reminders">
     <div class="subsection-title">
@@ -53,70 +84,19 @@
       </tbody>
     </table>
   </section>
+  <div class="reminder-form">
+  <form
+  action="{% url 'add-reminder' postit.id %}"
+  method="post"
+  class="subsection-content"
+  autocomplete="off"
+  >
+  <h3>Add a Reminder</h3>
+  {% csrf_token %} 
+  {{ reminder_form.as_p }}
+  <button type="submit" class="btn submit">Add Reminder</button>
+</form>
 </div>
-
-</section>
-
-<!-- <section class="catagories">
-  <h3>Available Catagories</h3>
-  <div class="subsection-content">
-    {% for catagory in catagories %}
-      <div class="catagory-container">
-        <div class="color-block" style="background-color: {{ postit.color }}"></div>
-        <p> {{ catagory.tag }}</p>
-        <form action="{% url 'associate-catagory' postit.id catagory.id %}" method="post">
-          {% csrf_token %}
-          <button type="submit" class="btn submit">Give Catagory</button>
-        </form>
-      </div>
-    {% endfor %}
-  </div>
-</section>
-
-<section class="catagories">
-  <div class="subsection-title">
-    <h2>Catagories</h2>
-  </div> -->
-
-  <h3>{{ postit.title }}'s Catagories</h3>
-  <div class="subsection-content">
-    {% if postit.catagories.count %} 
-      {% for catagory in postit.catagories.all %}
-        <div class="catagory-container">
-          <div class="color-block" style="background-color: {{ postit.color }}"></div>
-          <a href="{% url 'catagory-detail' catagory.id %}">
-            <p>A {{ catagory.tag }} tag</p>
-          </a>
-          <form action="{% url 'remove-catagory' postit.id catagory.id %}" method="post">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger">Remove Catagory</button>
-          </form>
-
-        </div>
-      {% endfor %} 
-    {% else %}
-      <p class="no-catagories">{{postit.title}} doesn't have any catagories!</p>
-    {% endif %}
-  </div>
-
-  <h3>Available Catagories</h3>
-<div class="subsection-content">
-  {% if catagories.count %} 
-    {% for catagory in catagories.all %}
-      <div class="catagory-container">
-        <div class="color-block" style="background-color: {{ postit.color }}"></div>
-        <a href="{% url 'catagory-detail' catagory.id %}">
-          <p>{{ catagory.tag }} tag</p>
-        </a>
-        <form action="{% url 'associate-catagory' postit.id catagory.id %}" method="post">
-          {% csrf_token %}
-          <button type="submit" class="btn submit">Give Catagory</button>
-        </form>
-      </div>
-    {% endfor %} 
-  {% else %}
-    <p class="all-catagories">{{postit.title}} already has all the available catagories 🥳</p>
-  {% endif %}
 </div>
 
 </section>
